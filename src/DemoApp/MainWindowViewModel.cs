@@ -9,6 +9,7 @@ namespace DemoApp
         public MainWindowViewModel(ILogger<MainWindowViewModel> logger)
         {
             this.logger = logger;
+            this.logger.LogDebug("MainWindowViewModel created");
         }
     }
 }

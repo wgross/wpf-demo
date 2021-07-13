@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Serilog;
 
 namespace DemoApp
 {
@@ -9,6 +10,7 @@ namespace DemoApp
         {
             return Host
                 .CreateDefaultBuilder()
+                .UseSerilog(ConfigureRuntimeLogger)
                 .ConfigureServices(AppServices)
                 .Build();
         }

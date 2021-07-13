@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Serilog;
 using System;
 using System.Windows;
 
@@ -13,6 +14,11 @@ namespace DemoApp
         private readonly IHost host;
         private IServiceProvider Services => this.host.Services;
 
+        static App()
+        {
+            ConfigureBootstrapLogger();
+        }
+
         public App()
         {
             this.host = CreateGenericHost();
@@ -24,8 +30,17 @@ namespace DemoApp
         /// </summary>
         private async void Application_Startup(object sender, StartupEventArgs e)
         {
-            await this.host.StartAsync();
-            this.Services.GetRequiredService<MainWindow>().Show();
+            try
+            {
+                Log.Debug("Starting host");
+
+                await this.host.StartAsync();
+                this.Services.GetRequiredService<MainWindow>().Show();
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Starting host failed");
+            }
         }
 
         /// <summary>
@@ -33,8 +48,20 @@ namespace DemoApp
         /// </summary>
         private async void Application_Exit(object sender, ExitEventArgs e)
         {
-            using (this.host)
-                await this.host.StopAsync();
+            try
+            {
+                Log.Debug("Stopping host");
+
+                using (this.host)
+                    await this.host.StopAsync();
+            }
+            finally
+            {
+                Log.Information("Host stopped");
+
+                // pending log messages a written to the sinks
+                Log.CloseAndFlush();
+            }
         }
     }
 }
