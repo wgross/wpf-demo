@@ -18,3 +18,9 @@ This allows to filter log messages by referring to properties or other metadata 
 
 - [Bootstrap Logging/Serilog.Extensions.Hosting](https://github.com/serilog/serilog-extensions-hosting)
 - [File Sink and Json Formatter](https://github.com/serilog/serilog-sinks-file)
+
+## Dynamic Translation
+
+The demonstrator shows an approach to change the ui language dynamically. 
+Translations from the Resources foillow the culture change. 
+Details in [Translation/readme.me](Translation/readme.md).

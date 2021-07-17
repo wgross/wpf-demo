@@ -19,6 +19,7 @@ namespace DemoApp
         {
             services.AddSingleton<MainWindow>();
             services.AddSingleton<MainWindowViewModel>();
+            services.AddSingleton<Translation.TranslationExampleViewModel>();
         }
     }
 }
