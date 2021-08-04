@@ -1,64 +1,32 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Serilog;
-using System;
+﻿using System;
 using System.Windows;
 
 namespace DemoApp
 {
-    /// <summary>
-    /// Interaction logic for App.xaml
-    /// </summary>
     public partial class App : Application
     {
-        private IHost host;
-        private IServiceProvider Services => this.host.Services;
+        private readonly MainWindowViewModel mainWindowViewModel;
+        private MainWindow mainWindow;
 
-        static App()
+        public App()
         {
-            ConfigureBootstrapLogger();
+            throw new InvalidOperationException(nameof(App));
         }
 
-        /// <summary>
-        /// The Startup event handler replaces the <see cref="Application.StartupUri"/> to fetch the
-        /// <see cref="MainWindow"/> from the <see cref="IServiceCollection"/>
-        /// </summary>
-        private async void Application_Startup(object sender, StartupEventArgs e)
+        public App(MainWindowViewModel mainWindowViewModel)
         {
-            try
-            {
-                this.host = CreateGenericHost(e.Args);
-
-                Log.Debug("Starting host");
-
-                await this.host.StartAsync();
-                this.Services.GetRequiredService<MainWindow>().Show();
-            }
-            catch (Exception ex)
-            {
-                Log.Error(ex, "Starting host failed");
-            }
+            this.mainWindowViewModel = mainWindowViewModel;
         }
 
-        /// <summary>
-        /// Stop and dispose the <see cref="host"/>
-        /// </summary>
-        private async void Application_Exit(object sender, ExitEventArgs e)
+        private void Application_Startup(object sender, StartupEventArgs e)
         {
-            try
-            {
-                Log.Debug("Stopping host");
+            this.mainWindow = new MainWindow(this.mainWindowViewModel);
+            this.mainWindow.Show();
+        }
 
-                using (this.host)
-                    await this.host.StopAsync();
-            }
-            finally
-            {
-                Log.Information("Host stopped");
-
-                // pending log messages a written to the sinks
-                Log.CloseAndFlush();
-            }
+        private void Application_Exit(object sender, ExitEventArgs e)
+        {
+            this.mainWindow.Close();
         }
     }
 }
