@@ -6,10 +6,10 @@ namespace DemoApp
 {
     public partial class App
     {
-        private static IHost CreateGenericHost()
+        private static IHost CreateGenericHost(string[] args)
         {
             return Host
-                .CreateDefaultBuilder()
+                .CreateDefaultBuilder(args)
                 .UseSerilog(ConfigureRuntimeLogger)
                 .ConfigureServices(AppServices)
                 .Build();
@@ -20,6 +20,7 @@ namespace DemoApp
             services.AddSingleton<MainWindow>();
             services.AddSingleton<MainWindowViewModel>();
             services.AddSingleton<Translation.TranslationExampleViewModel>();
+            services.AddSingleton<Validation.ValidationExampleViewModel>();
         }
     }
 }

@@ -11,17 +11,12 @@ namespace DemoApp
     /// </summary>
     public partial class App : Application
     {
-        private readonly IHost host;
+        private IHost host;
         private IServiceProvider Services => this.host.Services;
 
         static App()
         {
             ConfigureBootstrapLogger();
-        }
-
-        public App()
-        {
-            this.host = CreateGenericHost();
         }
 
         /// <summary>
@@ -32,6 +27,8 @@ namespace DemoApp
         {
             try
             {
+                this.host = CreateGenericHost(e.Args);
+
                 Log.Debug("Starting host");
 
                 await this.host.StartAsync();
