@@ -2,13 +2,13 @@ using DemoApp.Validation;
 using System.Linq;
 using Xunit;
 
-namespace DempApp.Test
+namespace DemoApp.Test
 {
-    public class UnitTest1
+    public class ValidationExampleTest
     {
         private ValidationExampleViewModel viewModel;
 
-        public UnitTest1()
+        public ValidationExampleTest()
         {
             this.viewModel = new ValidationExampleViewModel();
         }
