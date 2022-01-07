@@ -13,7 +13,7 @@ To make this working th XAML of the App was modified:
 - Startup event handler was introduced showing the main window instance provided by the dependency injection container
 - Exit event handler was introduced disposing and stopping the generic host
 
-### Variant 2: Using a alternative Entry Point
+### Variant 2: Using an alternative Entry Point
 
 (see at https://stackoverflow.com/questions/6156550/replacing-the-wpf-entry-point)
 
@@ -26,8 +26,17 @@ Also it should not be `async` because the would create another thread not being 
 - The dependency injection container provides an instance of the `App` class having the view model of the main window injected.
 
 While this is more code and slightly more complicated it is the more flexible. 
-It would be possible to add console app features by adding a command line args interpreter.
-The project already contains the Win32 API calls to show a console or to detach the console from the process in [Hosting/Win32](./Hosting/Win32.cs)
+
+## Running in a Console if required
+
+
+
+This extends the startup of the app as described above. 
+The STAThread attribute is removed from the App main class. 
+Instead the thread hosting the Application is started manually with the apartment set to STA: ```thread.SetApartmentState(ApartmentState.STA)```.
+
+Access to a console is either achieved by allocation a new one or attaching to the parent console in method ```RunAsConsole```
+The Win32 API calls to show a console or to detach the console from the process are implemented in [Hosting/Win32](./Hosting/Win32.cs).
 
 ## Serilog Provides Structured Logging
 

@@ -1,25 +1,29 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using DemoApp.Hosting;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Serilog;
 using System;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace DemoApp
 {
     public static class Program
     {
-        [STAThread]
-        public static int Main(string[] args)
+        public static async Task<int> Main(bool console = false, string[] args = null)
         {
             ConfigureBootstrapLogger();
 
-            using var host = CreateGenericHost(args);
             try
             {
-                host.Start();
-
-                var app = host.Services.GetRequiredService<App>();
-                app.InitializeComponent();
-                app.Run();
+                if (console)
+                {
+                    await RunAsConsole(args);
+                }
+                else
+                {
+                    await RunAsWpfApplication(args);
+                }
 
                 return 0;
             }
@@ -33,6 +37,47 @@ namespace DemoApp
             {
                 Log.CloseAndFlush();
             }
+        }
+
+        private static async Task RunAsConsole(string[] args)
+        {
+            Win32.SetStdHandle(Win32.StdOutputHandle, IntPtr.Zero);
+
+            if (!Win32.AttachToParentConsole())
+                Win32.AllocConsole();
+
+            using var host = CreateGenericHost(args);
+
+            //host.Start();
+
+            Console.WriteLine($"Hello World! {(args is not null ? string.Join(" ", args) : string.Empty)}");
+
+            await host.StopAsync();
+        }
+
+        private static async Task RunAsWpfApplication(string[] args)
+        {
+            Win32.FreeConsole();
+
+            using var host = CreateGenericHost(args);
+
+            await host.StartAsync();
+
+            TaskCompletionSource wpfAppCompleted = new();
+
+            var thread = new Thread(new ThreadStart(() =>
+            {
+                var app = host.Services.GetRequiredService<App>();
+                app.InitializeComponent();
+                app.Run();
+
+                wpfAppCompleted.SetResult();
+            }));
+
+            thread.SetApartmentState(ApartmentState.STA);
+            thread.Start();
+
+            await wpfAppCompleted.Task;
         }
 
         private static IHost CreateGenericHost(string[] args)

@@ -8,6 +8,11 @@ namespace DemoApp.Hosting
         // see PInvoke.Net: https://www.pinvoke.net/default.aspx/kernel32.setstdhandle
         internal const int StdOutputHandle = -11;
 
+        internal static bool AttachToParentConsole() => AttachConsole(uint.MaxValue);
+
+        [DllImport("kernel32", SetLastError = true, ExactSpelling = true)]
+        internal static extern bool AttachConsole(uint dwProcessId);
+
         [DllImport("kernel32", SetLastError = true, ExactSpelling = true)]
         internal static extern bool AllocConsole();
 
