@@ -26,7 +26,7 @@
             <Validation.ErrorTemplate>
                 <ControlTemplate>
                     <Grid 
-                        Background="Transparent"
+                        Background="{x:Null}"
                         ToolTip="{Binding Path=ErrorContent}"> 
                         <Border 
                             BorderBrush="Red"
