@@ -7,7 +7,7 @@ namespace DemoApp.Translation
     public record UICultureChangedEventArgs(CultureInfo Old, CultureInfo New);
 
     /// <summary>
-    /// The interface is implemented by classes which require notfication of a change of the UI culture
+    /// The interface is implemented by classes which require notification of a change of the UI culture
     /// </summary>
     public interface INotifyCultureChanged : IRecipient<UICultureChangedEventArgs>
     {
@@ -18,6 +18,10 @@ namespace DemoApp.Translation
     /// </summary>
     internal static class UICultureChangedEvent
     {
+        /// <summary>
+        /// Raise the event of a language change from the current culture <see cref="Thread.CurrentCulture"/> to a 
+        /// new culture <paramref name="uiCulture"/>".
+        /// </summary>
         public static void SetCurrentUICulture(CultureInfo uiCulture)
         {
             if (uiCulture.Name != Thread.CurrentThread.CurrentUICulture.Name)
