@@ -2,7 +2,9 @@
 
 ## Dependency Injection in App
 
-The App main class of the WPF-demo initializes a *Generic Host* instance providing logging, configuration and dependency injection.
+The `App` main class of the WPF-demo initializes a *Generic Host* instance providing logging, configuration and dependency injection.
+The `App` class publishes the `IServiceProvider` as a resource to the other controls of the application from where it can be retrieved by any `FrameworkElement` using its
+`FindResource` method.
 
 ### Variant 1: Creating a Generic Host inside of App
 
@@ -28,8 +30,6 @@ Also it should not be `async` because the would create another thread not being 
 While this is more code and slightly more complicated it is the more flexible. 
 
 ## Running in a Console if required
-
-
 
 This extends the startup of the app as described above. 
 The STAThread attribute is removed from the App main class. 

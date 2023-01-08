@@ -6,112 +6,111 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace DemoApp
+namespace DemoApp;
+
+public static class Program
 {
-    public static class Program
+    public static async Task<int> Main(bool console = false, string[] args = null)
     {
-        public static async Task<int> Main(bool console = false, string[] args = null)
+        ConfigureBootstrapLogger();
+
+        try
         {
-            ConfigureBootstrapLogger();
-
-            try
+            if (console)
             {
-                if (console)
-                {
-                    await RunAsConsole(args);
-                }
-                else
-                {
-                    await RunAsWpfApplication(args);
-                }
-
-                return 0;
+                await RunAsConsole(args);
             }
-            catch (Exception ex)
+            else
             {
-                Log.Fatal("Startup Failed:", ex);
-
-                return 1;
+                await RunAsWpfApplication(args);
             }
-            finally
-            {
-                Log.CloseAndFlush();
-            }
-        }
 
-        private static async Task RunAsConsole(string[] args)
+            return 0;
+        }
+        catch (Exception ex)
         {
-            Win32.SetStdHandle(Win32.StdOutputHandle, IntPtr.Zero);
+            Log.Fatal("Startup Failed:", ex);
 
-            if (!Win32.AttachToParentConsole())
-                Win32.AllocConsole();
-
-            using var host = CreateGenericHost(args);
-
-            //host.Start();
-
-            Console.WriteLine($"Hello World! {(args is not null ? string.Join(" ", args) : string.Empty)}");
-
-            await host.StopAsync();
+            return 1;
         }
-
-        private static async Task RunAsWpfApplication(string[] args)
+        finally
         {
-            Win32.FreeConsole();
-
-            using var host = CreateGenericHost(args);
-
-            await host.StartAsync();
-
-            TaskCompletionSource wpfAppCompleted = new();
-
-            var thread = new Thread(new ThreadStart(() =>
-            {
-                var app = host.Services.GetRequiredService<App>();
-                app.InitializeComponent();
-                app.Run();
-
-                wpfAppCompleted.SetResult();
-            }));
-
-            thread.SetApartmentState(ApartmentState.STA);
-            thread.Start();
-
-            await wpfAppCompleted.Task;
+            Log.CloseAndFlush();
         }
+    }
 
-        private static IHost CreateGenericHost(string[] args)
+    private static async Task RunAsConsole(string[] args)
+    {
+        Win32.SetStdHandle(Win32.StdOutputHandle, IntPtr.Zero);
+
+        if (!Win32.AttachToParentConsole())
+            Win32.AllocConsole();
+
+        using var host = CreateGenericHost(args);
+
+        //host.Start();
+
+        Console.WriteLine($"Hello World! {(args is not null ? string.Join(" ", args) : string.Empty)}");
+
+        await host.StopAsync();
+    }
+
+    private static async Task RunAsWpfApplication(string[] args)
+    {
+        Win32.FreeConsole();
+
+        using var host = CreateGenericHost(args);
+
+        await host.StartAsync();
+
+        TaskCompletionSource wpfAppCompleted = new();
+
+        var thread = new Thread(new ThreadStart(() =>
         {
-            return Host
-                .CreateDefaultBuilder(args)
-                .UseSerilog(ConfigureRuntimeLogger)
-                .ConfigureServices(ConfigureAppServices)
-                .Build();
-        }
+            var app = host.Services.GetRequiredService<App>();
+            app.InitializeComponent();
+            app.Run();
 
-        private static void ConfigureAppServices(HostBuilderContext context, IServiceCollection services)
-        {
-            services.AddSingleton<App>();
-            services.AddSingleton<MainWindowViewModel>();
-            services.AddSingleton<Translation.TranslationExampleViewModel>();
-            services.AddSingleton<Validation.ValidationExampleViewModel>();
-        }
+            wpfAppCompleted.SetResult();
+        }));
 
-        /// <summary>
-        /// Enable logging until the config file was read and the app is runnning.
-        /// </summary>
-        private static void ConfigureBootstrapLogger()
-        {
-            Log.Logger = new LoggerConfiguration()
-                .WriteTo.File("log-bootstrap.log")
-                .CreateBootstrapLogger();
-        }
+        thread.SetApartmentState(ApartmentState.STA);
+        thread.Start();
 
-        private static void ConfigureRuntimeLogger(HostBuilderContext context, IServiceProvider services, LoggerConfiguration configuration)
-        {
-            configuration
-                .ReadFrom.Configuration(context.Configuration)
-                .ReadFrom.Services(services);
-        }
+        await wpfAppCompleted.Task;
+    }
+
+    private static IHost CreateGenericHost(string[] args)
+    {
+        return Host
+            .CreateDefaultBuilder(args)
+            .UseSerilog(ConfigureRuntimeLogger)
+            .ConfigureServices(ConfigureAppServices)
+            .Build();
+    }
+
+    private static void ConfigureAppServices(HostBuilderContext context, IServiceCollection services)
+    {
+        services.AddSingleton<App>();
+        services.AddSingleton<MainWindowViewModel>();
+        services.AddSingleton<Translation.TranslationExampleViewModel>();
+        services.AddSingleton<Validation.ValidationExampleViewModel>();
+    }
+
+    /// <summary>
+    /// Enable logging until the config file was read and the app is runnning.
+    /// </summary>
+    private static void ConfigureBootstrapLogger()
+    {
+        Log.Logger = new LoggerConfiguration()
+            .WriteTo.File("log-bootstrap.log")
+            .CreateBootstrapLogger();
+    }
+
+    private static void ConfigureRuntimeLogger(HostBuilderContext context, IServiceProvider services, LoggerConfiguration configuration)
+    {
+        configuration
+            .ReadFrom.Configuration(context.Configuration)
+            .ReadFrom.Services(services);
     }
 }
