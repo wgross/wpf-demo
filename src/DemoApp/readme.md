@@ -61,3 +61,24 @@ The base class [PropertyBagViewModelBase](PropertyBagViewModelBase.cs) holds an 
 The name of the property is provided by the C# compiler using a parameter attributed by ```[CallerMemberName]```.
 
 To raise notification the methods of the base class ```ObservableObject``` from WPF community extensions are used.
+
+## Host a Web Service in WPF
+
+The demonstrator shows an approach to provide a web service API (`http://localhost:5000/data`). 
+This is a fringe case but may be useful to make a software accessible from PowerShell (`Invoke-RestMethod`) for automation.
+
+This requires a reference to the web framework in the project file: 
+```xml
+<ItemGroup>
+	<FrameworkReference Include="Microsoft.AspNetCore.App" />
+</ItemGroup>
+```
+
+The web uses minimal API and is hosted as a `HostedService` implemented in [./WebService](./WebService/HostedWebApp.cs).
+Even static web pages could be served by setting the `WebRootPath` to the pages directory and the static file middleware to the web host.
+
+(see also [github issue](https://github.com/dotnet/runtime/issues/31012))
+
+
+  
+

@@ -5,4 +5,3 @@
 
 using System.Diagnostics.CodeAnalysis;
 
-[assembly: SuppressMessage("AsyncUsage", "AsyncFixer01:Unnecessary async/await usage", Justification = "<Pending>", Scope = "member", Target = "~M:DemoApp.WebService.HostedWebApp.StartAsync(System.Threading.CancellationToken)~System.Threading.Tasks.Task")]

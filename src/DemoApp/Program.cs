@@ -1,4 +1,5 @@
 ﻿using DemoApp.Hosting;
+using DemoApp.WebService;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Serilog;
@@ -92,6 +93,7 @@ public static class Program
         services.AddSingleton<MainWindowViewModel>();
         services.AddSingleton<Translation.TranslationExampleViewModel>();
         services.AddSingleton<Validation.ValidationExampleViewModel>();
+        services.AddHostedService<HostedWebApp>();
     }
 
     /// <summary>
