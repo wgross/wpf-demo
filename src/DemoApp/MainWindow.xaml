@@ -6,8 +6,8 @@
         xmlns:tr="clr-namespace:DemoApp.Translation"
         xmlns:vl="clr-namespace:DemoApp.Validation"
         mc:Ignorable="d"
-        Title="WPF Demo App" 
-        Height="450" 
+        Title="WPF Demo App"
+        Height="450"
         Width="800">
     <Window.Resources>
         <tr:ResourceManagerTranslationSource x:Key="translationSource" ResourceManager="{x:Static tr:Translations.ResourceManager}" />
@@ -17,7 +17,7 @@
             <Setter Property="Margin" Value="0,5,0,5" />
         </Style>
     </Window.Resources>
-    
+
     <StackPanel
         Orientation="Vertical">
         <tr:TranslationExample
@@ -27,5 +27,4 @@
         <vl:ValidationExample
             DataContext="{Binding ValidationExample}" />
     </StackPanel>
-    
 </Window>

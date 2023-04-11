@@ -1,6 +1,5 @@
 ﻿using Microsoft.Toolkit.Mvvm.Messaging;
 using System.Globalization;
-using System.Threading;
 
 namespace DemoApp.Translation
 {
@@ -19,7 +18,7 @@ namespace DemoApp.Translation
     internal static class UICultureChangedEvent
     {
         /// <summary>
-        /// Raise the event of a language change from the current culture <see cref="Thread.CurrentCulture"/> to a 
+        /// Raise the event of a language change from the current culture <see cref="Thread.CurrentCulture"/> to a
         /// new culture <paramref name="uiCulture"/>".
         /// </summary>
         public static void SetCurrentUICulture(CultureInfo uiCulture)

@@ -1,8 +1,6 @@
 ﻿using Microsoft.Toolkit.Mvvm.ComponentModel;
 using System.Collections.ObjectModel;
 using System.Globalization;
-using System.Linq;
-using System.Threading;
 
 namespace DemoApp.Translation
 {

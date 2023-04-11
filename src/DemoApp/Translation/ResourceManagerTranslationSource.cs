@@ -6,7 +6,7 @@ namespace DemoApp.Translation
     /// Implement a translation source which is added to the resources of a translated control.
     /// </summary>
     public sealed class ResourceManagerTranslationSource : ITranslationSource
-    {   
+    {
         public ResourceManager ResourceManager
         {
             get; set;

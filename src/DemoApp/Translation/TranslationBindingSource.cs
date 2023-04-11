@@ -1,5 +1,4 @@
 ﻿using Microsoft.Toolkit.Mvvm.Messaging;
-using System;
 using System.ComponentModel;
 
 namespace DemoApp.Translation
