@@ -93,11 +93,12 @@ public static class Program
         services.AddSingleton<MainWindowViewModel>();
         services.AddSingleton<Translation.TranslationExampleViewModel>();
         services.AddSingleton<Validation.ValidationExampleViewModel>();
+        services.AddSingleton<ListTree.ListTreeExampleViewModel>();
         services.AddHostedService<HostedWebApp>();
     }
 
     /// <summary>
-    /// Enable logging until the config file was read and the app is runnning.
+    /// Enable logging until the config file was read and the app is running.
     /// </summary>
     private static void ConfigureBootstrapLogger()
     {
