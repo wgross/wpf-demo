@@ -1,0 +1,21 @@
+﻿<UserControl x:Class="DemoApp.ListTree.ListTreeExample"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:local="clr-namespace:DemoApp.ListTree"
+             mc:Ignorable="d"
+             Padding="5"
+             d:DesignHeight="450" d:DesignWidth="800"
+             Validation.ErrorTemplate="{x:Null}">
+    <DockPanel
+        LastChildFill="True">
+        <TextBlock
+            DockPanel.Dock="top"
+            Style="{DynamicResource TitleTextBlock}"
+            Text="ListTree Example" />
+
+        <local:ListTreeView />
+
+    </DockPanel>
+</UserControl>
