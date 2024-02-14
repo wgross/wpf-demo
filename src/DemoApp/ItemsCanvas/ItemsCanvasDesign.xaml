@@ -1,0 +1,112 @@
+﻿<UserControl
+    x:Class="DemoApp.ItemsCanvas.UserControl1"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:DemoApp.ItemsCanvas"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d">
+    <Grid Background="White">
+        <Canvas>
+            <Image>
+                <Image.Source>
+                    <DrawingImage>
+                        <DrawingImage.Drawing>
+                            <DrawingGroup ClipGeometry="M0,0 V50 H72 V0 H0 Z">
+                                <GeometryDrawing Brush="White">
+                                    <GeometryDrawing.Pen>
+                                        <Pen
+                                            Brush="Black"
+                                            EndLineCap="Flat"
+                                            LineJoin="Miter"
+                                            StartLineCap="Flat"
+                                            Thickness="2.5" />
+                                    </GeometryDrawing.Pen>
+                                    <GeometryDrawing.Geometry>
+                                        <EllipseGeometry
+                                            Center="27,27"
+                                            RadiusX="6.25"
+                                            RadiusY="6.25" />
+                                    </GeometryDrawing.Geometry>
+                                </GeometryDrawing>
+                                <GeometryDrawing>
+                                    <GeometryDrawing.Pen>
+                                        <Pen
+                                            Brush="Black"
+                                            EndLineCap="Round"
+                                            LineJoin="Miter"
+                                            StartLineCap="Flat"
+                                            Thickness="2.5" />
+                                    </GeometryDrawing.Pen>
+                                    <GeometryDrawing.Geometry>
+                                        <LineGeometry StartPoint="27,27" EndPoint="70,27" />
+                                    </GeometryDrawing.Geometry>
+                                </GeometryDrawing>
+                                <GeometryDrawing Brush="White">
+                                    <GeometryDrawing.Pen>
+                                        <Pen
+                                            Brush="White"
+                                            EndLineCap="Flat"
+                                            LineJoin="Miter"
+                                            StartLineCap="Flat"
+                                            Thickness="2.5" />
+                                    </GeometryDrawing.Pen>
+                                    <GeometryDrawing.Geometry>
+                                        <EllipseGeometry
+                                            Center="27,27"
+                                            RadiusX="4.0"
+                                            RadiusY="4.0" />
+                                    </GeometryDrawing.Geometry>
+                                </GeometryDrawing>
+                            </DrawingGroup>
+                        </DrawingImage.Drawing>
+                    </DrawingImage>
+                </Image.Source>
+            </Image>
+            <Path
+                Canvas.Left="240.674"
+                Canvas.Top="152.696"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Fill="White"
+                Stretch="Fill"
+                Stroke="Black"
+                StrokeLineJoin="Round"
+                StrokeThickness="5">
+                <Path.Data>
+                    <PathGeometry Figures="M100,100 L0,200 L200,200 L100,100" />
+                </Path.Data>
+            </Path>
+            <!--<Path
+                Canvas.Left="240.674"
+                Canvas.Top="225"
+                Width="100"
+                Height="2"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Fill="#FFF4F4F5"
+                Stretch="Fill"
+                Stroke="Black">
+                <Path.Data>
+                    <PathGeometry Figures="M240,225 " />
+                </Path.Data>
+            </Path>-->
+            <!--<Path
+                Canvas.Left="291.674"
+                Canvas.Top="152.696"
+                Width="50"
+                Height="75"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Fill="#FFF4F4F5"
+                Stretch="Fill"
+                Stroke="Black">
+                <Path.Data>
+                    <PathGeometry Figures="M291.674,152.696 L340.674,227" />
+                </Path.Data>
+            </Path>-->
+        </Canvas>
+    </Grid>
+</UserControl>

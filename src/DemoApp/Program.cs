@@ -94,6 +94,7 @@ public static class Program
         services.AddSingleton<Translation.TranslationExampleViewModel>();
         services.AddSingleton<Validation.ValidationExampleViewModel>();
         services.AddSingleton<ListTree.ListTreeExampleViewModel>();
+        services.AddSingleton<ItemsCanvas.ItemsCanvasViewModel>();
         services.AddHostedService<HostedWebApp>();
     }
 

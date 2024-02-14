@@ -6,6 +6,7 @@
     <UseWPF>true</UseWPF>
     <StartupObject>DemoApp.Program</StartupObject>
     <ImplicitUsings>enable</ImplicitUsings>
+    <GenerateDocumentationFile>False</GenerateDocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>

@@ -12,9 +12,9 @@ public partial class App : Application
         throw new InvalidOperationException(nameof(App));
     }
 
-    public App(IServiceProvider servieProvider)
+    public App(IServiceProvider serviceProvider)
     {
-        this.serviceProvider = servieProvider;
+        this.serviceProvider = serviceProvider;
     }
 
     private void Application_Startup(object sender, StartupEventArgs e)

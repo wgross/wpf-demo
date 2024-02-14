@@ -1,4 +1,5 @@
-﻿using DemoApp.ListTree;
+﻿using DemoApp.ItemsCanvas;
+using DemoApp.ListTree;
 using DemoApp.Translation;
 using DemoApp.Validation;
 using Microsoft.Extensions.Logging;
@@ -13,6 +14,7 @@ public class MainWindowViewModel
         TranslationExampleViewModel trvm,
         ValidationExampleViewModel vlvm,
         ListTreeExampleViewModel ltvm,
+        ItemsCanvasViewModel itemsCanvasViewModel,
         ILogger<MainWindowViewModel> logger)
     {
         this.logger = logger;
@@ -20,6 +22,7 @@ public class MainWindowViewModel
         this.TranslationExample = trvm;
         this.ValidationExample = vlvm;
         this.ListTreeExample = ltvm;
+        this.ItemsCanvasExample = itemsCanvasViewModel;
     }
 
     public TranslationExampleViewModel TranslationExample { get; private set; }
@@ -27,4 +30,6 @@ public class MainWindowViewModel
     public ValidationExampleViewModel ValidationExample { get; }
 
     public ListTreeExampleViewModel ListTreeExample { get; }
+
+    public ItemsCanvasViewModel ItemsCanvasExample { get; }
 }
