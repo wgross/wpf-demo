@@ -95,6 +95,7 @@ public static class Program
         services.AddSingleton<Validation.ValidationExampleViewModel>();
         services.AddSingleton<ListTree.ListTreeExampleViewModel>();
         services.AddSingleton<ItemsCanvas.ItemsCanvasViewModel>();
+        services.AddSingleton<PolymorphTab.PolymorphTabViewModel>();
         services.AddHostedService<HostedWebApp>();
     }
 

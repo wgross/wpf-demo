@@ -47,7 +47,10 @@
                 </DataTemplate>
 
                 <DataTemplate DataType="{x:Type local:SegmentWithGeometry}">
-                    <Image local:ActualSizeObserver.Observe="True" local:ActualSizeObserver.ObservedHeight="{Binding ActualHeight, Mode=OneWayToSource}" local:ActualSizeObserver.ObservedWidth="{Binding ActualWidth, Mode=OneWayToSource}">
+                    <Image
+                        local:ActualSizeObserver.Observe="True"
+                        local:ActualSizeObserver.ObservedHeight="{Binding ActualHeight, Mode=OneWayToSource}"
+                        local:ActualSizeObserver.ObservedWidth="{Binding ActualWidth, Mode=OneWayToSource}">
                         <Image.RenderTransform>
                             <RotateTransform Angle="{Binding Angle}" CenterX="7" CenterY="7" />
                         </Image.RenderTransform>

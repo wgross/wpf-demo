@@ -5,11 +5,12 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:ic="clr-namespace:DemoApp.ItemsCanvas"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:pt="clr-namespace:DemoApp.PolymorphTab"
     xmlns:tr="clr-namespace:DemoApp.Translation"
     xmlns:vl="clr-namespace:DemoApp.Validation"
     Title="WPF Demo App"
-    Width="800"
-    Height="450"
+    Width="1200"
+    Height="1024"
     mc:Ignorable="d">
     <Window.Resources>
 
@@ -23,13 +24,24 @@
     </Window.Resources>
 
     <TabControl>
+        <TabItem Header="Polymorph Tabs">
+            <DockPanel LastChildFill="True">
+                <TextBlock DockPanel.Dock="Top">Demonstrates TabItem from a collection of different view model classes</TextBlock>
+                <pt:PolymorphTabView DataContext="{Binding PolymorphTabExample}" />
+            </DockPanel>
+        </TabItem>
+
         <TabItem Header="Items Canvas">
             <ic:ItemsCanvasView DataContext="{Binding ItemsCanvasExample}" />
         </TabItem>
+
         <TabItem Header="Misc">
             <StackPanel Orientation="Vertical">
 
-                <tr:TranslationExample Margin="5" VerticalAlignment="Top" DataContext="{Binding TranslationExample}" />
+                <tr:TranslationExample
+                    Margin="5"
+                    VerticalAlignment="Top"
+                    DataContext="{Binding TranslationExample}" />
 
                 <vl:ValidationExample DataContext="{Binding ValidationExample}" />
 
@@ -38,8 +50,12 @@
                 -->
             </StackPanel>
         </TabItem>
+
         <TabItem Header="Canvas mit Viewbox">
-            <Viewbox MinWidth="290" MinHeight="200" Stretch="UniformToFill">
+            <Viewbox
+                MinWidth="290"
+                MinHeight="200"
+                Stretch="UniformToFill">
 
                 <Canvas Width="290" Height="200">
                     <Image
@@ -57,5 +73,6 @@
                 </Canvas>
             </Viewbox>
         </TabItem>
+
     </TabControl>
 </Window>

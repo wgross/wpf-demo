@@ -1,5 +1,6 @@
 ﻿using DemoApp.ItemsCanvas;
 using DemoApp.ListTree;
+using DemoApp.PolymorphTab;
 using DemoApp.Translation;
 using DemoApp.Validation;
 using Microsoft.Extensions.Logging;
@@ -15,6 +16,7 @@ public class MainWindowViewModel
         ValidationExampleViewModel vlvm,
         ListTreeExampleViewModel ltvm,
         ItemsCanvasViewModel itemsCanvasViewModel,
+        PolymorphTabViewModel polymorphTabViewModel,
         ILogger<MainWindowViewModel> logger)
     {
         this.logger = logger;
@@ -23,6 +25,7 @@ public class MainWindowViewModel
         this.ValidationExample = vlvm;
         this.ListTreeExample = ltvm;
         this.ItemsCanvasExample = itemsCanvasViewModel;
+        this.PolymorphTabExample = polymorphTabViewModel;
     }
 
     public TranslationExampleViewModel TranslationExample { get; private set; }
@@ -32,4 +35,6 @@ public class MainWindowViewModel
     public ListTreeExampleViewModel ListTreeExample { get; }
 
     public ItemsCanvasViewModel ItemsCanvasExample { get; }
+
+    public PolymorphTabViewModel PolymorphTabExample { get; }
 }
